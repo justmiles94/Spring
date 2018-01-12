@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<style>
+table, td {
+	border: 1px solid black;
+}
+</style>
+</head>
+<body>
+
+	<p>Click the button to create a TABLE, a TR and a TD element.</p>
+
+	<textarea id='text'></textarea>
+	<br />
+	<button onclick="query()">Try it</button>
+	<div id='results'></div>
+	<script>
+		function query(){
+		    var xmlHttp = new XMLHttpRequest();
+		    xmlHttp.open( "GET", "/landingzone?name="+document.getElementById('text').value, false ); // false for synchronous request
+		    xmlHttp.send();
+		    var stuff = JSON.parse(xmlHttp.responseText);
+			dataTable = createTable("dataTable");
+			for (x in stuff) {
+				row = addRowToTable(dataTable);
+				for (y in stuff[x]) {
+					addTableDataToRow(stuff[x][y], row);
+				}
+			}
+			div = document.getElementById('results');
+			div.innerHTML = (dataTable);
+		}
+		function myFunction() {
+		    var xmlHttp = new XMLHttpRequest();
+		    xmlHttp.open( "GET", "/landingzone?name="+document.getElementById('text').value, false ); // false for synchronous request
+		    xmlHttp.send();
+			
+		    var stuff = JSON.parse(xmlHttp.responseText);
+
+			dataTable = createTable("dataTable");
+			for (x in stuff) {
+				row = addRowToTable(dataTable);
+				for (y in stuff[x]) {
+					addTableDataToRow(stuff[x][y], row);
+				}
+			}
+			div = document.createElement("DIV");
+			div.appendChild(dataTable);
+			div.appendChild(document.createElement("BR"));
+			document.body.appendChild(div);
+		}
+		function createTable(id) {
+			var count = document.getElementsById(id).length
+			if(count == 0){
+				return x
+			}
+			var x = document.getElementById(id)
+			x = document.createElement("TABLE");
+			x.setAttribute("id", id);
+			return x;
+		}
+		function addRowToTable(dataTable) {
+			var y = document.createElement("TR");
+			dataTable.appendChild(y);
+			return y;
+		}
+		function addTableDataToRow(cellText, tableRow) {
+			var z = document.createElement("TD");
+			var t = document.createTextNode(cellText);
+			z.appendChild(t);
+			tableRow.appendChild(z);
+			return z;
+		}
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, td {
+	border: 3px solid black;
+}
+</style>
+</head>
+<body>
+
+	<p>Click the button to create a TABLE, a TR and a TD element.</p>
+
+	<button onclick="myFunction()">Try it</button>
+	<p>${name}</p>
+
+	<script>
+      function myFunction() {
+          people = ["justin", "ryan", "Dana", "Keith"];
+          places = ["Granite", "Edwardsville", "Clayton"];
+
+          dataTable = createTable("dataTable");
+          for (x in people){
+            row = addRowToTable(dataTable);
+            for (y in places){
+              addTableDataToRow(people[x]+places[y], row);
+            }
+          }
+          div = document.createElement("DIV");
+          document.body.appendChild(div);
+          div.appendChild(document.createElement("BR"));
+          div.appendChild(dataTable);
+      }
+      function createTable(id){
+        var x = document.createElement("TABLE");
+        x.setAttribute("id", id);
+        return x;
+      }
+      function addRowToTable(dataTable){
+        var y = document.createElement("TR");
+        dataTable.appendChild(y);
+        return y;
+      }
+      function addTableDataToRow(cellText, tableRow){
+        var z = document.createElement("TD");
+        var t = document.createTextNode(cellText);
+        z.appendChild(t);
+        tableRow.appendChild(z);
+        return z;
+      }
+      window.onload  = myFunction;
+    </script>
+
+</body>
+</html>
